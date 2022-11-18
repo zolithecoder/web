@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+<style>
+
+
+</style>
+
+
+
+
+
+
+
+</head>
+<body>
+
+<h3 class="guestbook-header">GUEST BOOK</h3>
+
+<form name="guestBook.guestBookForm" novalidate>
+  <div class="row">
+    <div class="col-xs-4 col-left">
+      <div class="form-group" show-errors>
+        <input type="text" class="form-control" ng-model="entry.name" name="name" id="userInput" ng-disabled="guestBook.isSubmitting" placeholder="NAME *" required>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="form-group no-margin" show-errors>
+        <textarea class="form-control" ng-model="entry.message" name="message" id="userMessage" ng-disabled="guestBook.isSubmitting" placeholder="Comment *" required ng-maxlength="600"></textarea>
+      </div>
+    </div>
+    <hr>
+    <div class="col-xs-2 col-align-bottom col-right">
+      <div >
+        <button type="button" class="btn btn-primary" onclick="fv();erik();dataDelete()"  ng-click="guestBook.addEntry(entry)" ng-disabled="guestBook.isSubmitting"> SUBMIT </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
+
+
+
+
+
+
+<h4 id="m">Empty</h4>
+
+<hr>
+
+<h1>Name:</h1>
+<span id="userInputValue"></span>
+
+
+
+<h1>Comment:</h1>
+<span id="userInputValue2"></span>
+
+
+<div class="col-xs-2 col-align-bottom col-right">
+  <div>
+    <button type="button" class="btn btn-primary" onclick="ftv();clearp()"> CLEAR </button>
+  </div>
+</div>
+
+
+
+
+
+
+<script>
+
+
+
+
+function fv() {
+    var input = document.getElementById("userInput").value
+    
+    document.getElementById("userInputValue").innerHTML = input
+
+    var input2 = document.getElementById("userMessage").value
+    document.getElementById("userInputValue2").innerHTML = input2;
+    // alert(input);
+    if (input === '') { 
+      alert("Hiba! Üres a név mező");  	
+      
+      document.getElementById('userMessage').value ="";
+    }
+    if (input2 === '') { 
+      alert("Hiba! Üres a comment mező"); 
+
+      document.getElementById('userInput').value =""; 	
+   
+    }
+}
+
+
+
+var listanev = new Array();
+var listamessage = new Array();
+
+
+function erik(){
+ listanev.push(document.getElementById("userInput").value);
+ listamessage.push(document.getElementById("userMessage").value);
+
+ document.getElementById("userInputValue").innerHTML = listanev;
+ document.getElementById("userInputValue2").innerHTML = listamessage;
+
+ console.log(listanev);
+ 
+ if (listanev.length === 0){
+  document.getElementById("m").innerHTML = "The array is empty" }
+ else {
+  document.getElementById("m").innerHTML = listanev.length+' db element';
+ }
+
+}
+
+  function dataDelete(){
+    document.getElementById('userInput').value ="";
+    document.getElementById('userMessage').value ="";
+  }
+
+
+function ftv(){
+  while(listanev.length > 0) {
+  listanev.pop();
+  }
+  while(listamessage.length > 0) {
+     listamessage.pop();
+  }
+  document.getElementById("userInputValue").innerHTML = listanev;
+  document.getElementById("userInputValue2").innerHTML = listamessage;
+  document.getElementById("m").value ='-';
+}
+
+
+function clearp(){
+  document.getElementById("m").innerHTML = '';
+  console.log('lefut');
+}
+
+</script>
+
+
+
+</body>
+</html> 
